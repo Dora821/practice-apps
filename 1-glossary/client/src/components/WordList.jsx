@@ -6,8 +6,11 @@ class WordList extends React.Component {
     super(props);
   }
   render() {
+    console.log('items to render', this.props.render);
     return (
-      <Word />
+      <div>
+        {this.props.render.map(word=> <Word word={word}/>)}
+      </div>
     )
   }
 }
