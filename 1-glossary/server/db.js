@@ -15,8 +15,9 @@ const getAll = ()=> {
   return Glossary.find({});
 };
 const getOne = (key) => {
-  // console.log('db function runnning', key);
-  return Glossary.findOne({word:key}).exec();
+  console.log('db search function runnning', key);
+  // return Glossary.findOne({'word':key}).exec();
+  return Glossary.findOne({'word' : {$regex: key, $options: 'i'}}).exec();
 };
 const save = (obj)=> {
   // console.log('data in obj', obj);

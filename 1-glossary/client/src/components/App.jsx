@@ -63,7 +63,7 @@ handleSearch(keyWord) {
     // console.log('res', res);
     this.setState({allWords:[res.data], wordsToRender:[res.data]})
   }))
-  .catch(console.log('there is error on search'))
+  .catch((err)=>console.log(err));
 }
 
   render() {
