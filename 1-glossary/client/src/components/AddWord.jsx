@@ -4,7 +4,7 @@ import WordPopUp from './WordPopUp.jsx';
 class AddWord extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {trigger: false, word: '', description: ''};
+    this.state = {trigger: false, word: ''};
     this.handleAddBtn = this.handleAddBtn.bind(this);
     this.getDescription = this.getDescription.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -18,7 +18,11 @@ class AddWord extends React.Component {
   }
 
   getDescription(desc) {
-    this.setState({trigger: false, description: desc})
+    console.log('addWord this.state.value')
+    let target = {'word': this.state.word, 'definition': desc};
+    console.log('target', target);
+    this.props.add(target);
+    this.setState({trigger: false, word: ''})
   }
 
   handleChange(event) {
@@ -30,7 +34,7 @@ class AddWord extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleAddBtn}>
-          <input onChange={this.handleChange}></input>
+          <input value={this.state.word} onChange={this.handleChange}></input>
           <button>Add</button>
         </form>
         {this.state.trigger && <WordPopUp getDesc={this.getDescription}/>}

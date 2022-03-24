@@ -13,6 +13,7 @@ class WordPopUp extends React.Component {
   }
 
   handleSubmit(event) {
+    // console.log('handleSubmit is clicked', this.state.value);
     this.props.getDesc(this.state.value);
     this.setState({value: ''});
   }

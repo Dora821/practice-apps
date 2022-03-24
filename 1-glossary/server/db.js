@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/Glossary');
 // 2. Set up any schema and models needed by the app
 let GlossarySchema = mongoose.Schema({
-  word: {type: String, unique: true},
+  word: {type: String, unique: true, required: true},
   definition: String
 });
 // 3. Export the models
@@ -15,22 +15,25 @@ const getAll = ()=> {
   return Glossary.find({});
 };
 const getOne = (key) => {
-  console.log('db function runnning', key);
+  // console.log('db function runnning', key);
   return Glossary.findOne({word:key}).exec();
 };
 const save = (obj)=> {
-  console.log('data in obj', obj);
-  return Glossary.save(obj);
+  // console.log('data in obj', obj);
+  // let doc = new Glossary(obj);
+  // return doc.save();
+  // console.log(obj);
+  return Glossary.create(obj);
 };
 
 const update = (filter, update) => {
-  console.log('filter', filter);
-  console.log('update', update);
+  // console.log('filter', filter);
+  // console.log('update', update);
   return Glossary.findOneAndUpdate(filter, update, {upsert:true});
 };
 
-const delEntry = (obj) => {
-  return Glossary.deleteOne(obj);
+const delEntry = (id) => {
+  return Glossary.deleteOne({'_id': id});
 };
 
 // };
