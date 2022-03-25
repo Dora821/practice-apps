@@ -9,6 +9,8 @@ class Account extends React.Component {
     this.PwdChange= this.PwdChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
+
+
   NameChange(e){
     this.setState({name: e.target.value});
   }
@@ -19,7 +21,7 @@ class Account extends React.Component {
   PwdChange(e){
     this.setState({password: e.target.value});
   }
-  submitHandler(){
+  submitHandler(e){
     event.preventDefault();
     this.props.account(this.state);
 

@@ -11,22 +11,23 @@ class Confirmation extends React.Component {
         <div>
           <h4>Account Information</h4>
           <div>
-            <span>Name:  </span>
-            <span>Email: </span>
+            <span>Name: {this.props.summary.userData.username} </span>
+            <span>Email: {this.props.summary.userData.email} </span>
           </div>
         </div>
         <div>
           <h4>Address Information</h4>
           <div>
-            <span>Address:  </span>
-            <span>Phone Number: </span>
+            <span>Address:{this.props.summary.userData.address1 + ', ' + this.props.summary.userData.address2 + ', ' + this.props.summary.userData.city + ', ' + this.props.summary.userData.curState + ', ' + this.props.summary.userData.zipcode}  </span>
+            <span>Phone Number: {this.props.summary.userData.phoneNum} </span>
           </div>
         </div>
         <div>
           <h4>Billing Information</h4>
           <div>
-            <span>Credit Card:  </span>
+            <span>Credit Card: {this.props.summary.userData.creditCard} </span>
           </div>
+          <button onClick={this.props.btn}>Confirm</button>
         </div>
       </div>
     )
