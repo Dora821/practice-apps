@@ -1,5 +1,6 @@
 const mysql = require("mysql2");
 const Promise = require("bluebird");
+require('dotenv').config();
 
 // Configure process.env variables in ../.env
 const connection = mysql.createConnection({
@@ -19,6 +20,6 @@ db.connectAsync()
       "CREATE TABLE IF NOT EXISTS responses (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY)"
     )
   )
-  .catch((err) => console.log(err));
+  .catch((err) => console.log('db err', err));
 
 module.exports = db;
