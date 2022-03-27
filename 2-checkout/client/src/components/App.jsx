@@ -4,6 +4,7 @@ import Account from './UserForm.jsx';
 import Address from './AddressForm.jsx';
 import Billing from './BillingForm.jsx';
 import Confirmation from './Confirmation.jsx';
+import {findIfNewClient, postInformation} from './clientRequest.js';
 
 
 class App extends React.Component {
@@ -30,19 +31,36 @@ class App extends React.Component {
     renderCC:false,
     renderConfirm:false
   }
-  this.checkIfNewUser = this.checkIfNewUser.bind(this);
+  // this.checkIfNewUser = this.checkIfNewUser.bind(this);
   this.mainBtnHandler = this.mainBtnHandler.bind(this);
   this.accountBtnHandler = this.accountBtnHandler.bind(this);
   this.AddressBtnHandler = this.AddressBtnHandler.bind(this);
   this.CCBtnHandler = this.CCBtnHandler.bind(this);
   this.confirmButtonHandler = this.confirmButtonHandler.bind(this);
 }
-checkIfNewUser(){
 
-}
+// componentDidMount() {
+//  cnost session_id = {JSON.stringify(document.cookie, undefined, "\t")};
+//  console.log('session_id', session_id)
+// }
+
+// checkIfNewUser(){
+//  cnost session_id = {JSON.stringify(document.cookie, undefined, "\t")};
+//  console.log('session_id', session_id)
+// }
 
 mainBtnHandler(){
-  this.setState({renderMainPage:false, renderAccount:true});
+  findIfNewClient().
+  then((res)=>{
+    console.log('res.data', res.data);
+    if (res.data) {
+      this.setState({renderMainPage:false, renderAccount:true});
+    } else {
+      alert("you have been registered");
+    }
+  })
+  .catch(error=>console.log(error));
+
 }
 
 accountBtnHandler(obj){
@@ -102,12 +120,18 @@ CCBtnHandler(obj){
 
 confirmButtonHandler(){
   console.log('confirm button is working')
-  this.setState({renderConfirm:false, renderMainPage:true})
+  postInformation(this.state.userData)
+  .then(()=>this.setState({renderConfirm:false, renderMainPage:true}))
+  .catch(error=>console.log("information can not be posted"))
+
 }
 
 render() {
   return (
     <div>
+      {/* <p>
+        <code>Page Cookie: {JSON.stringify(document.cookie, undefined, "\t")}</code>
+      </p> */}
       {this.state.renderMainPage &&<h1>Welcome to Checkout</h1>}
       {this.state.renderMainPage && <MainHome create={this.mainBtnHandler}/>}
       {this.state.renderAccount && <Account account={this.accountBtnHandler}/>}

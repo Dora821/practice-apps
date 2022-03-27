@@ -3,8 +3,7 @@ CREATE DATABASE checkout;
 USE checkout;
 
 CREATE TABLE clientInfo (
-  id INT NOT NULL,
-  session_id VARCHAR(255) NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(20),
   email VARCHAR(255),
   passwd VARCHAR(20),
@@ -17,5 +16,7 @@ CREATE TABLE clientInfo (
   creditCard VARCHAR(20),
   expiration DATE,
   cvv VARCHAR(3),
-  billingZip VARCHAR(6)
+  billingZip VARCHAR(6),
+  session_id VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
 );
